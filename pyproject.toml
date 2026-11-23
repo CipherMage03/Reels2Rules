@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reel2rules"
+version = "0.1.0"
+description = "Free, local video-to-transcript tool for trading research: YouTube, Shorts, Instagram reels, TikTok -> clean transcript + key frames, plus Claude Code skills that turn them into testable strategy specs."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+dependencies = [
+  "yt-dlp>=2025.1.1",
+  "faster-whisper>=1.1",
+  "av>=11,<16",          # av 16+ breaks faster-whisper 1.2.x decode_audio (metadata_errors kwarg)
+  "imageio-ffmpeg>=0.5",
+]
+keywords = ["transcript", "youtube", "instagram", "whisper", "trading", "backtesting", "quant", "claude-code"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+reel2rules = "reel2rules.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
